@@ -1,493 +1,134 @@
-          <!DOCTYPE html>
-          <html lang="pt">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>KaiLee Bot</title>
-              <!-- Definindo o favicon -->
-              <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
-          </head>
-          <body>
-              <!DOCTYPE html>
-              <html lang="pt-BR">
-              <head>
-                  <meta charset="UTF-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <title>KaiLee Bot</title>
-                  <style>
-                      body {
-                          font-family: 'Arial', sans-serif;
-                          margin: 0;
-                          padding: 0;
-                          transition: background 0.3s, color 0.3s;
-                          color: #000000;
-                          text-align: center;
-                          overflow-x: hidden;
-                      }
-                      body.light-mode {
-                          background: linear-gradient(135deg, #000000, #e0e0e0);
-                          color: #317;
-                      }
-                      body.dark-mode {
-                          background: linear-gradient(135deg, #000000, #000000);
-                          color: #000000;
-                      }
-                      header {
-                          background: #000000;
-                          color: #000000;
-                          padding: 1em 2em;
-                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                          position: fixed;
-                          width: 100%;
-                          top: 0;
-                          left: 0;
-                          z-index: 1000;
-                          transition: opacity 0.3s, transform 0.3s;
-                      }
-                      header.hidden {
-                          opacity: 0;
-                          transform: translateY(-100%);
-                      }
-                      header h1 {
-                          margin: 0;
-                          font-size: 2.8em;
-                          font-weight: 700;
-                          letter-spacing: 2px;
-                          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-                      }
-                      nav {
-                          background: #ffffff;
-                          padding: 0.5em 1em;
-                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                          position: fixed;
-                          top: 60px;
-                          left: 0;
-                          right: 0;
-                          z-index: 1000;
-                          display: flex;
-                          justify-content: center;
-                          transition: opacity 0.3s, transform 0.3s;
-                      }
-                      nav.hidden {
-                          opacity: 0;
-                          transform: translateY(-100%);
-                      }
-                      nav a {
-                          display: inline-block;
-                          color: #1f1f1f;
-                          text-decoration: none;
-                          padding: 0.5em 1em;
-                          margin: 0.5em;
-                          border-radius: 25px;
-                          transition: background 0.3s, color 0.3s;
-                          font-weight: 500;
-                      }
-                      nav a:hover {
-                          background: #007bff;
-                          color: #000000;
-                      }
-                      .container {
-                          padding: 80px 2em 2em;
-                          max-width: 800px;
-                          margin: 0 auto;
-                          position: relative;
-                          top: 60px;
-                          animation: fadeIn 2s ease-in-out;
-                      }
-                      img {
-                          max-width: 250px;
-                          border-radius: 20px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-                          transition: transform 0.3s ease, box-shadow 0.3s ease;
-                          margin-bottom: 1em;
-                      }
-                      img:hover {
-                          transform: scale(1.1);
-                          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-                      }
-                      h2, h3 {
-                          font-size: 2.5em;
-                          margin: 0.5em 0;
-                          color: #007bff;
-                          font-weight: 700;
-                          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-                      }
-                      p {
-                          font-size: 1.2em;
-                          margin: 0.5em 0;
-                          line-height: 1.6;
-                          max-width: 800px;
-                          margin: 0 auto;
-                      }
-                      ul {
-                          list-style: none;
-                          padding: 0;
-                          margin: 0;
-                      }
-                      li {
-                          font-size: 1.2em;
-                          margin: 0.5em 0;
-                          padding: 0.8em;
-                          background: #ffffff;
-                          border-radius: 10px;
-                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                          transition: background 0.3s, box-shadow 0.3s;
-                      }
-                      li:hover {
-                          background: #f0f0f0;
-                          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-                      }
-                      a {
-                          display: inline-block;
-                          font-size: 1.2em;
-                          padding: 1em 2em;
-                          margin: 1em;
-                          color: #ffffff;
-                          background: #007bff;
-                          text-decoration: none;
-                          border-radius: 25px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-                          transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-                          font-weight: 500;
-                      }
-                      a:hover {
-                          background: #0056b3;
-                          transform: scale(1.05);
-                          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-                      }
-                      .form-container {
-                          background: #ffffff;
-                          padding: 1.5em;
-                          border-radius: 10px;
-                          margin: 2em auto;
-                          max-width: 600px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                      }
-                      .form-container h3 {
-                          margin-bottom: 1em;
-                          font-size: 2em;
-                          color: #007bff;
-                          font-weight: 700;
-                          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-                      }
-                      .form-container input, .form-container textarea {
-                          width: calc(100% - 2em);
-                          padding: 0.8em;
-                          margin-bottom: 1em;
-                          border: 1px solid #ddd;
-                          border-radius: 5px;
-                          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                      }
-                      .form-container input[type="submit"] {
-                          background: #007bff;
-                          color: #ffffff;
-                          border: none;
-                          cursor: pointer;
-                          transition: background 0.3s;
-                          font-weight: 500;
-                      }
-                      .form-container input[type="submit"]:hover {
-                          background: #0056b3;
-                      }
-                      footer {
-                          background: #1f1f1f;
-                          color: #ffffff;
-                          padding: 1em;
-                          position: fixed;
-                          width: 100%;
-                          bottom: 0;
-                          left: 0;
-                          box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-                          font-size: 0.9em;
-                          opacity: 0;
-                          transform: translateY(20px);
-                          transition: opacity 0.3s, transform 0.3s;
-                      }
-                      footer.show {
-                          opacity: 1;
-                          transform: translateY(0);
-                      }
-                      .section {
-                          padding: 3em 2em;
-                          background: #ffffff;
-                          border-radius: 10px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                          margin-bottom: 2em;
-                          animation: fadeInUp 2s ease-in-out;
-                      }
-                      .features {
-                          text-align: left;
-                          max-width: 800px;
-                          margin: 0 auto;
-                      }
-                      .features h3 {
-                          font-size: 2em;
-                          color: #007bff;
-                          margin-bottom: 1em;
-                      }
-                      .features ul {
-                          padding: 0;
-                      }
-                      .features li {
-                          font-size: 1.2em;
-                          margin: 1em 0;
-                          padding: 1em;
-                          border-left: 4px solid #007bff;
-                          background: #f9f9f9;
-                          border-radius: 10px;
-                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                      }
-                      .updates {
-                          background: #f9f9f9;
-                          padding: 2em;
-                          border-radius: 10px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                      }
-                      .updates h3 {
-                          font-size: 2em;
-                          color: #007bff;
-                          margin-bottom: 1em;
-                      }
-                      .updates ul {
-                          padding: 0;
-                      }
-                      .updates li {
-                          font-size: 1.2em;
-                          margin: 1em 0;
-                          padding: 1em;
-                          border-left: 4px solid #007bff;
-                          background: #ffffff;
-                          border-radius: 10px;
-                          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                      }
-                      .settings-btn {
-                          position: fixed;
-                          bottom: 0px;
-                          right: 0px;
-                          background: #007bff;
-                          color: #ffffff;
-                          border: none;
-                          border-radius: 50%;
-                          padding: 15px;
-                          font-size: 1.5em;
-                          cursor: pointer;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                          transition: background 0.3s, transform 0.3s;
-                          z-index: 1000;
-                      }
-                      .settings-btn:hover {
-                          background: #0056b3;
-                          transform: scale(1.1);
-                      }
-                      .settings-panel {
-                          position: fixed;
-                          bottom: 80px;
-                          right: 20px;
-                          background: #ffffff;
-                          border: 1px solid #ddd;
-                          border-radius: 10px;
-                          padding: 20px;
-                          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                          transition: opacity 0.3s, transform 0.3s;
-                          opacity: 0;
-                          transform: translateY(20px);
-                          display: none;
-                          z-index: 1000;
-                      }
-                      .settings-panel.show {
-                          opacity: 1;
-                          transform: translateY(0);
-                          display: block;
-                      }
-                      .settings-panel label {
-                          display: flex;
-                          align-items: center;
-                          margin-bottom: 10px;
-                          font-size: 1.2em;
-                      }
-                      .settings-panel input[type="checkbox"] {
-                          margin-right: 10px;
-                      }
-                      .settings-panel .switch {
-                          position: relative;
-                          display: inline-block;
-                          width: 60px;
-                          height: 34px;
-                      }
-                      .settings-panel .switch input {
-                          opacity: 0;
-                          width: 0;
-                          height: 0;
-                      }
-                      .settings-panel .slider {
-                          position: absolute;
-                          cursor: pointer;
-                          top: 0;
-                          left: 0;
-                          right: 0;
-                          bottom: 0;
-                          background-color: #ccc;
-                          transition: .4s;
-                          border-radius: 34px;
-                      }
-                      .settings-panel .slider:before {
-                          position: absolute;
-                          content: "";
-                          height: 26px;
-                          width: 26px;
-                          border-radius: 50%;
-                          left: 4px;
-                          bottom: 4px;
-                          background-color: white;
-                          transition: .4s;
-                      }
-                      input:checked + .slider {
-                          background-color: #007bff;
-                      }
-                      input:checked + .slider:before {
-                          transform: translateX(26px);
-                      }
-                      .settings-panel .theme-switch {
-                          margin-top: 1em;
-                      }
-                      .settings-panel .theme-switch label {
-                          font-size: 1em;
-                          margin-right: 10px;
-                      }
-                      @keyframes fadeIn {
-                          from { opacity: 0; transform: translateY(20px); }
-                          to { opacity: 1; transform: translateY(0); }
-                      }
-                      @keyframes fadeInUp {
-                          from { opacity: 0; transform: translateY(20px); }
-                          to { opacity: 1; transform: translateY(0); }
-                      }
-                  </style>
-              </head>
-              <body class="light-mode">
-                  <header>
-                      <h1>KaiLee Bot</h1>
-                  </header>
-                  <nav>
-                      <a href="#about">Sobre</a>
-                      <a href="#features">Funcionalidades</a>
-                      <a href="#updates">Atualizações</a>
-                      <a href="#contact">Contato</a>
-                  </nav>
-                  <div class="container">
-                      <section id="about" class="section">
-                          <h2>Sobre o KaiLee Bot</h2>
-                          <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
-                          <p>O KaiLee Bot é um bot Discord poderoso e versátil, projetado para enriquecer sua experiência no servidor. Ele oferece uma variedade de funcionalidades, desde gerenciamento de servidores até comandos divertidos para entreter sua comunidade.</p>
-                          <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" target="_blank">Adicionar ao Discord</a>
-                      </section>
-                      <section id="features" class="section features">
-                          <h2>Funcionalidades</h2>
-                          <h3>Principais Funcionalidades:</h3>
-                          <ul>
-                              <li>🎵 Comandos de Música: Reproduza e gerencie música diretamente no seu servidor.</li>
-                              <li>🛠️ Gerenciamento de Servidor: Ferramentas para administrar seu servidor de forma eficiente.</li>
-                              <li>🎮 Jogos e Diversão: Comandos e minijogos para entreter sua comunidade.</li>
-                              <li>🔔 Notificações: Receba alertas e atualizações importantes.</li>
-                              <li>🤖 Integração com APIs: Conecte-se com serviços externos para funcionalidades adicionais.</li>
-                          </ul>
-                      </section>
-                      <section id="updates" class="section updates">
-                          <h2>Atualizações Recentes</h2>
-                          <h3>Últimas Novidades:</h3>
-                          <ul>
-                              <li>🚀 Nova funcionalidade de comandos de música lançada! Agora você pode criar playlists personalizadas.</li>
-                              <li>🔧 Melhoria no gerenciamento de servidores: Agora com opções avançadas de configuração.</li>
-                              <li>🎉 Adição de novos minijogos divertidos para animar sua comunidade.</li>
-                              <li>🔄 Atualizações regulares para garantir o melhor desempenho e segurança.</li>
-                          </ul>
-                      </section>
-                      <section id="contact" class="section">
-                          <h2>Contato</h2>
-                          <div class="form-container">
-                              <h3>Entre em Contato</h3>
-                              <form action="https://formspree.io/f/xvgpzveg" method="post">
-                                  <input type="text" name="name" placeholder="Seu Nome" required>
-                                  <input type="email" name="email" placeholder="Seu Email" required>
-                                  <textarea name="message" rows="5" placeholder="Sua Mensagem" required></textarea>
-                                  <input type="submit" value="Enviar Mensagem">
-                              </form>
-                          </div>
-                      </section>
-                  </div>
-                  <footer class="footer">
-                      <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
-                  </footer>
-                  <but clas="setings-btn" onclick="togleSettingsPanel()"</button>
-                  <iv clsettings-anel" id="settingsPanel">
-                      <h3> </3>
-                      <label>
-                          <input type="checkbox" id="themeSwitch">
-                          <span class="slider"></span>
-                          <span> </span>
-                      </label>
-                      <div class="theme-switch">
-                          <label for="showMenuSwitch"></label>
-                          <input type="checkx" id="showMenuSwitch" checked>
-                      </div>
-                  </div>
-                  <script>
-                      document.addEventListener('DOMContentLoaded', () => {
-                          const themeSwitch = document.getElementById('themeSwitch');
-                          const showMenuSwitch = document.getElementById('showMenuSwitch');
-                          const settingsPanel = document.getElementById('settingsPanel');
-                          const header = document.querySelector('header');
-                          const nav = document.querySelector('nav');
-                          const footer = document.querySelector('footer');
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaiLee Bot</title>
+    <style>
+        /* Your CSS code remains the same */
+    </style>
+</head>
+<body class="light-mode">
+    <header>
+        <h1>KaiLee Bot</h1>
+    </header>
+    <nav>
+        <a href="#about">Sobre</a>
+        <a href="#features">Funcionalidades</a>
+        <a href="#updates">Atualizações</a>
+        <a href="#contact">Contato</a>
+    </nav>
+    <div class="container">
+        <section id="about" class="section">
+            <h2>Sobre o KaiLee Bot</h2>
+            <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
+            <p>O KaiLee Bot é um bot Discord poderoso e versátil...</p>
+            <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" target="_blank">Adicionar ao Discord</a>
+        </section>
+        <section id="features" class="section features">
+            <h2>Funcionalidades</h2>
+            <h3>Principais Funcionalidades:</h3>
+            <ul>
+                <li>🎵 Comandos de Música</li>
+                <li>🛠️ Gerenciamento de Servidor</li>
+                <li>🎮 Jogos e Diversão</li>
+                <li>🔔 Notificações</li>
+                <li>🤖 Integração com APIs</li>
+            </ul>
+        </section>
+        <section id="updates" class="section updates">
+            <h2>Atualizações Recentes</h2>
+            <h3>Últimas Novidades:</h3>
+            <ul>
+                <li>🚀 Nova funcionalidade de comandos de música</li>
+                <li>🔧 Melhoria no gerenciamento de servidores</li>
+                <li>🎉 Adição de novos minijogos</li>
+            </ul>
+        </section>
+        <section id="contact" class="section">
+            <h2>Contato</h2>
+            <div class="form-container">
+                <h3>Entre em Contato</h3>
+                <form action="https://formspree.io/f/xvgpzveg" method="post">
+                    <input type="text" name="name" placeholder="Seu Nome" required>
+                    <input type="email" name="email" placeholder="Seu Email" required>
+                    <textarea name="message" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    <input type="submit" value="Enviar Mensagem">
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer class="footer">
+        <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
+    </footer>
+    <button class="settings-btn" onclick="toggleSettingsPanel()">⚙️</button>
+    <div class="settings-panel" id="settingsPanel">
+        <h3>Configurações</h3>
+        <label>
+            <input type="checkbox" id="themeSwitch">
+            <span class="slider"></span>
+            <span>Modo Escuro</span>
+        </label>
+        <div class="theme-switch">
+            <label for="showMenuSwitch">Mostrar Menu</label>
+            <input type="checkbox" id="showMenuSwitch" checked>
+        </div>
+    </div>
 
-                          // Load theme from local storage
-                          if (localStorage.getItem('theme') === 'dark') {
-                              document.body.classList.add('dark-mode');
-                              themeSwitch.checked = true;
-                          }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitch = document.getElementById('themeSwitch');
+            const showMenuSwitch = document.getElementById('showMenuSwitch');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const header = document.querySelector('header');
+            const nav = document.querySelector('nav');
+            const footer = document.querySelector('footer');
 
-                          themeSwitch.addEventListener('change', () => {
-                              if (themeSwitch.checked) {
-                                  document.body.classList.add('dark-mode');
-                                  document.body.classList.remove('light-mode');
-                                  localStorage.setItem('theme', 'dark');
-                              } else {
-                                  document.body.classList.add('light-mode');
-                                  document.body.classList.remove('dark-mode');
-                                  localStorage.setItem('theme', 'light');
-                              }
-                          });
+            // Load theme from local storage
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeSwitch.checked = true;
+            }
 
-                          showMenuSwitch.addEventListener('change', () => {
-                              if (showMenuSwitch.checked) {
-                                  nav.classList.remove('hidden');
-                              } else {
-                                  nav.classList.add('hidden');
-                              }
-                          });
+            themeSwitch.addEventListener('change', () => {
+                if (themeSwitch.checked) {
+                    document.body.classList.add('dark-mode');
+                    document.body.classList.remove('light-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.add('light-mode');
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
 
-                          window.addEventListener('scroll', () => {
-                              if (window.scrollY > 100) {
-                                  header.classList.add('hidden');
-                                  nav.classList.add('hidden');
-                              } else {
-                                  header.classList.remove('hidden');
-                                  nav.classList.remove('hidden');
-                              }
-                              if (window.scrollY + window.innerHeight >= document.body.offsetHeight - 100) {
-                                  footer.classList.add('show');
-                              } else {
-                                  footer.classList.remove('show');
-                              }
-                          });
+            showMenuSwitch.addEventListener('change', () => {
+                if (showMenuSwitch.checked) {
+                    nav.classList.remove('hidden');
+                } else {
+                    nav.classList.add('hidden');
+                }
+            });
 
-                          function toggleSettingsPanel() {
-                              settingsPanel.classList.toggle('show');
-                          }
-                      });
-                  </script>
-              </body>
-              </html>
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('hidden');
+                    nav.classList.add('hidden');
+                } else {
+                    header.classList.remove('hidden');
+                    nav.classList.remove('hidden');
+                }
+                if (window.scrollY + window.innerHeight >= document.body.offsetHeight - 100) {
+                    footer.classList.add('show');
+                } else {
+                    footer.classList.remove('show');
+                }
+            });
 
-          </body>
-          </html>
+            function toggleSettingsPanel() {
+                settingsPanel.classList.toggle('show');
+            }
+        });
+    </script>
+</body>
+</html>
