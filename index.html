@@ -282,19 +282,20 @@
     // Inicializa o contador com valor aleatório entre 5000 e 10000
     let serverCount = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
     const serverCountElement = document.getElementById('serverCount');
-    let lastUpdateTime = Date.now();
-    let isNotifying = false;
+    let lastUpdateTime = 0;
 
+    // Atualiza o contador com animação suave
     function updateServerCount() {
-      const timeElapsed = Date.now() - lastUpdateTime;
-      if (timeElapsed < 1000) return;  // Espera pelo menos 1 segundo para atualizar
-
-      let change = Math.floor(Math.random() * 3) - 1;  // Altera de -1 a +1
-      serverCount = Math.max(5000, Math.min(10000, serverCount + change));
-      animateNumber(serverCountElement, serverCount);
-      lastUpdateTime = Date.now();
+      const currentTime = Date.now();
+      if (currentTime - lastUpdateTime > 1000) { // Delay de 1 segundo
+        const target = Math.floor(Math.random() * 11) + serverCount;
+        animateNumber(serverCountElement, target);
+        serverCount = target;
+        lastUpdateTime = currentTime;
+      }
     }
 
+    // Função de animação de número
     function animateNumber(element, target) {
       const current = parseInt(element.innerText);
       const step = current < target ? 1 : -1;
@@ -306,34 +307,44 @@
 
     setInterval(updateServerCount, 2000); // Atualiza a cada 2 segundos
 
-    // Função de notificação com cooldown
-    function showNotification(message, sectionId) {
+    // Função de notificação com cooldown e emojis
+    let isNotifying = false;
+
+    const notifications = [
+      { message: 'Adicione nosso bot ao seu servidor! 🤖', section: 'about' },
+      { message: 'Entre no nosso servidor e tire dúvidas! 🗣️', section: 'updates' },
+      { message: 'Fique por dentro das novidades do KaiLee Bot! 🔔', section: 'features' },
+      { message: 'Curta nossos minijogos para relaxar! 🎮', section: 'features' },
+    ];
+
+    function showNotification(notification) {
       if (isNotifying) return;
       isNotifying = true;
 
-      const notification = document.createElement('div');
-      notification.classList.add('notification');
-      notification.innerHTML = `<strong>${message}</strong> <a href="#${sectionId}" style="color: white;">Ver</a>`;
+      const notifElement = document.createElement('div');
+      notifElement.classList.add('notification');
+      notifElement.innerHTML = `<strong>${notification.message}</strong> <a href="#${notification.section}" style="color: white;">Ver</a>`;
 
-      document.body.appendChild(notification);
+      document.body.appendChild(notifElement);
 
       setTimeout(() => {
-        notification.classList.add('show');
+        notifElement.classList.add('show');
       }, 100);
 
       setTimeout(() => {
-        notification.classList.remove('show');
+        notifElement.classList.remove('show');
         setTimeout(() => {
-          document.body.removeChild(notification);
+          document.body.removeChild(notifElement);
           isNotifying = false;
         }, 500);
       }, 7000); // Notificação visível por 7 segundos
     }
 
-    // Testando a notificação
-    setTimeout(() => {
-      showNotification('Adicione nosso bot ao seu servidor!', 'about');
-    }, 5000);
+    // Exibindo notificações a cada 10 segundos
+    setInterval(() => {
+      const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
+      showNotification(randomNotification);
+    }, 10000);
   </script>
 
 </body>
