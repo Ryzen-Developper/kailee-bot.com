@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=0.8"> <!-- Zoom de 80% -->
+  <meta name="viewport" content="width=device-width, initial-scale=0.8">
   <title>KaiLee Bot</title>
   <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -55,88 +55,6 @@
       border-radius: 5px;
     }
 
-    /* Container principal */
-    .container {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-
-    .section {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      margin-bottom: 50px;
-      padding: 40px;
-      animation: fadeInUp 1s ease-in-out;
-      text-align: center;
-    }
-
-    .section img {
-      max-width: 300px;
-      margin: 20px auto;
-      display: block;
-      border-radius: 10px;
-    }
-
-    .section h2 {
-      font-size: 2.5em;
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-
-    .section p {
-      font-size: 1.2em;
-      line-height: 1.6;
-      color: #555;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-
-    .button-primary {
-      background-color: #007bff;
-      color: white;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      text-decoration: none;
-      border-radius: 5px;
-      margin: 10px;
-      display: inline-block;
-      transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .button-primary:hover {
-      background-color: #0056b3;
-      transform: scale(1.05);
-    }
-
-    .features ul {
-      padding-left: 20px;
-      text-align: left;
-    }
-
-    .features li {
-      font-size: 1.2em;
-      padding-left: 10px;
-      margin: 15px 0;
-    }
-
-    footer {
-      background-color: #343a40;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      margin-top: 50px;
-    }
-
-    /* Animações */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     /* Barra de Status */
     .status-bar {
       background: white;
@@ -164,7 +82,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Notificações */
     .notification {
       background: #007bff;
       color: white;
@@ -186,26 +103,36 @@
       transform: translateY(0);
     }
 
-    /* Contato */
-    form {
+    .contact-form {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 15px;
+      gap: 10px;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    form input, form textarea {
-      width: 100%;
-      max-width: 600px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+    .contact-form input, .contact-form textarea, .contact-form button {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
       font-size: 1em;
     }
 
-    form button {
-      margin-top: 10px;
+    .contact-form button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
+
+    .contact-form button:hover {
+      background-color: #0056b3;
+    }
+
   </style>
 </head>
 <body>
@@ -229,48 +156,33 @@
     <a href="#contact">Contato</a>
   </nav>
 
-  <div class="container">
-    <section id="about" class="section">
-      <h2>Sobre o KaiLee Bot</h2>
-      <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
-      <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento do seu servidor e proporcionar entretenimento para sua comunidade.</p>
-      <div class="buttons">
-        <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
-        <a href="https://discord.gg/servidordobot" class="button-primary" target="_blank">Entrar no Servidor</a>
-      </div>
-    </section>
+  <div id="about" class="container">
+    <h2>Sobre</h2>
+    <p>O KaiLee Bot é o assistente perfeito para o seu servidor Discord! Com várias funcionalidades incríveis para moderadores e administradores.</p>
+  </div>
 
-    <section id="features" class="section features">
-      <h2>Funcionalidades</h2>
-      <ul>
-        <li>🎵 Comandos de Música: Toque e controle música diretamente no seu servidor.</li>
-        <li>🛠️ Gerenciamento de Servidor: Ferramentas para admins organizarem seu servidor com eficiência.</li>
-        <li>🎮 Minijogos: Diversão garantida para todos com jogos interativos.</li>
-        <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
-        <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
-      </ul>
-    </section>
+  <div id="features" class="container">
+    <h2>Funcionalidades</h2>
+    <ul>
+      <li>Comandos de moderação avançados</li>
+      <li>Integração com outros serviços</li>
+      <li>Suporte a várias plataformas</li>
+    </ul>
+  </div>
 
-    <section id="updates" class="section">
-      <h2>Atualizações Recentes</h2>
-      <ul>
-        <li>🚀 Nova função de playlists personalizadas no comando de música.</li>
-        <li>🔧 Melhoria no gerenciamento de servidor com novas opções avançadas.</li>
-        <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
-        <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
-      </ul>
-    </section>
+  <div id="updates" class="container">
+    <h2>Atualizações</h2>
+    <p>Fique por dentro das últimas melhorias no KaiLee Bot.</p>
+  </div>
 
-    <section id="contact" class="section">
-      <h2>Contato</h2>
-      <p>Entre em contato para mais informações ou dúvidas:</p>
-      <form action="https://formspree.io/f/xvgpzveg" method="post">
-        <input type="text" name="name" placeholder="Seu Nome" required>
-        <input type="email" name="email" placeholder="Seu Email" required>
-        <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
-        <button type="submit" class="button-primary">Enviar Mensagem</button>
-      </form>
-    </section>
+  <div id="contact" class="container">
+    <h2>Contato</h2>
+    <form class="contact-form" action="#">
+      <input type="text" placeholder="Seu nome" required />
+      <input type="email" placeholder="Seu email" required />
+      <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
   </div>
 
   <footer>
@@ -279,72 +191,64 @@
 
   <!-- Scripts -->
   <script>
-    // Inicializa o contador com valor aleatório entre 5000 e 10000
-    let serverCount = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+    let serverCount = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000; // Começa entre 5k e 10k
     const serverCountElement = document.getElementById('serverCount');
-    let lastUpdateTime = 0;
+    let lastUpdateTime = Date.now();
+    let target = serverCount;  // A meta inicial
 
-    // Atualiza o contador com animação suave
+    // Função para atualizar o contador suavemente
     function updateServerCount() {
+      // Definir a meta aleatória de incremento ou decremento
       const currentTime = Date.now();
-      if (currentTime - lastUpdateTime > 1000) { // Delay de 1 segundo
-        const target = Math.floor(Math.random() * 11) + serverCount;
+      if (currentTime - lastUpdateTime > 1500) { // Delay de 1,5 segundos
+        const delta = Math.floor(Math.random() * 11) - 5; // Incrementa ou decrementa de 5 a 5
+        target += delta; // Atualiza a meta
+
+        if (target < 5000) target = 5000; // Garante que não caia abaixo de 5k
+        if (target > 10000) target = 10000; // Garante que não suba acima de 10k
+
         animateNumber(serverCountElement, target);
-        serverCount = target;
         lastUpdateTime = currentTime;
       }
     }
 
     // Função de animação de número
     function animateNumber(element, target) {
-      const current = parseInt(element.innerText);
+      let current = parseInt(element.innerText, 10);
       const step = current < target ? 1 : -1;
       const interval = setInterval(() => {
-        element.innerText = current + step;
-        if (current + step === target) clearInterval(interval);
-      }, 50);
+        element.innerText = current;
+        current += step;
+        if (current === target) {
+          clearInterval(interval);
+        }
+      }, 50); // Atualiza a cada 50ms para animação suave
     }
 
     setInterval(updateServerCount, 2000); // Atualiza a cada 2 segundos
 
-    // Função de notificação com cooldown e emojis
-    let isNotifying = false;
-
-    const notifications = [
-      { message: 'Adicione nosso bot ao seu servidor! 🤖', section: 'about' },
-      { message: 'Entre no nosso servidor e tire dúvidas! 🗣️', section: 'updates' },
-      { message: 'Fique por dentro das novidades do KaiLee Bot! 🔔', section: 'features' },
-      { message: 'Curta nossos minijogos para relaxar! 🎮', section: 'features' },
-    ];
-
-    function showNotification(notification) {
-      if (isNotifying) return;
-      isNotifying = true;
-
-      const notifElement = document.createElement('div');
-      notifElement.classList.add('notification');
-      notifElement.innerHTML = `<strong>${notification.message}</strong> <a href="#${notification.section}" style="color: white;">Ver</a>`;
-
-      document.body.appendChild(notifElement);
-
+    // Função para mostrar notificações com emojis
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.classList.add('notification');
+      notification.innerHTML = `${message} <span>🚀</span>`;
+      document.body.appendChild(notification);
+      
+      // Exibir a notificação
       setTimeout(() => {
-        notifElement.classList.add('show');
+        notification.classList.add('show');
       }, 100);
 
+      // Remover a notificação após 5 segundos
       setTimeout(() => {
-        notifElement.classList.remove('show');
-        setTimeout(() => {
-          document.body.removeChild(notifElement);
-          isNotifying = false;
-        }, 500);
-      }, 7000); // Notificação visível por 7 segundos
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 500);
+      }, 5000);
     }
 
-    // Exibindo notificações a cada 10 segundos
-    setInterval(() => {
-      const randomNotification = notifications[Math.floor(Math.random() * notifications.length)];
-      showNotification(randomNotification);
-    }, 10000);
+    // Exemplo de notificação
+    setTimeout(() => showNotification('🎉 Adicione emojis ao seu servidor com o KaiLee Bot!'), 3000);
+
   </script>
 
 </body>
