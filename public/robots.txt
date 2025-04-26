@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://kailee-bot-com.vercel.app/sitemap.xml
