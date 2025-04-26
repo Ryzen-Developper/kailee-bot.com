@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <title>KaiLee Bot</title>
     <link rel="icon" type="image/png" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -13,77 +13,42 @@
             padding: 0;
             background-color: #f8f9fa;
             color: #333;
-            transform: scale(0.8);
-            transform-origin: top center;
-            transition: background-color 0.3s, color 0.3s;
+            zoom: 0.8;
         }
         header {
             background-color: #007bff;
             color: white;
-            padding: 20px;
+            padding: 30px 20px 70px 20px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        #status-bar {
-            background-color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 20px;
-            border-bottom: 1px solid #ccc;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            font-size: 1.4em;
-            position: relative;
-            z-index: 10;
-        }
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .circle {
-            width: 16px;
-            height: 16px;
-            background-color: #28a745;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-        .server-count {
-            font-weight: 600;
-            transition: all 0.5s ease;
         }
         nav {
             display: flex;
             justify-content: center;
             background-color: #343a40;
             padding: 10px 0;
-            gap: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 999;
         }
         nav a {
             color: white;
             font-size: 1.2em;
             text-decoration: none;
             padding: 10px 20px;
-            transition: background-color 0.3s, transform 0.2s;
-            border-radius: 8px;
+            margin: 0 15px;
+            transition: background-color 0.3s;
         }
         nav a:hover {
             background-color: #007bff;
-            transform: scale(1.1);
+            border-radius: 5px;
         }
         .container {
             max-width: 1200px;
             margin: 50px auto;
             padding: 0 20px;
-            position: relative;
         }
         .section {
             background-color: white;
@@ -95,7 +60,7 @@
             text-align: center;
         }
         .section img {
-            max-width: 300px;
+            max-width: 100%;
             border-radius: 10px;
             margin-bottom: 20px;
         }
@@ -104,82 +69,106 @@
             color: #007bff;
             margin-bottom: 20px;
         }
-        .section p {
+        .section p, .section li {
             font-size: 1.2em;
             line-height: 1.6;
             color: #555;
-        }
-        .button-primary, .button-secondary {
-            background: linear-gradient(135deg, #007bff, #0056b3);
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            text-decoration: none;
-            border-radius: 8px;
-            display: inline-block;
-            margin: 10px;
-            transition: all 0.3s;
-        }
-        .button-primary:hover, .button-secondary:hover {
-            background: linear-gradient(135deg, #0056b3, #00408a);
-            transform: scale(1.05);
-        }
-        .features ul {
-            padding-left: 20px;
-            text-align: left;
-        }
-        .features li {
-            font-size: 1.2em;
-            margin: 15px 0;
         }
         footer {
             background-color: #343a40;
             color: white;
             padding: 20px;
             text-align: center;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
         }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-        form input, form textarea {
-            width: 100%;
-            max-width: 600px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-        form button {
-            margin-top: 10px;
-        }
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
+        .button-primary {
             background-color: #007bff;
             color: white;
-            padding: 15px 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+        .button-primary:hover {
+            background-color: #0056b3;
+        }
+        .status-bar {
+            background-color: #fff;
+            padding: 15px 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            font-size: 1em;
-            animation: slideIn 0.5s, fadeOut 0.5s 4.5s forwards;
-            border: 2px solid black;
-            z-index: 999;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: -40px auto 20px auto;
+            position: relative;
+            z-index: 10;
         }
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
         }
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateX(100%); }
+        .status-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: limegreen;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .notification {
+            background: #fff;
+            border: 2px solid black;
+            border-radius: 10px;
+            color: #333;
+            padding: 15px 30px;
+            font-weight: bold;
+            margin: 20px auto;
+            text-align: center;
+            width: 300px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .notification:hover {
+            background: #f1f1f1;
+            transform: scale(1.05);
+        }
+        form input, form textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        form button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -189,12 +178,15 @@
         <p>Transforme seu servidor Discord com o KaiLee Bot</p>
     </header>
 
-    <div id="status-bar">
-        <div class="status-indicator">
-            <div class="circle"></div>
-            <span>Online</span>
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="status-dot"></div>
+            <span id="status">Online</span>
         </div>
-        <div class="server-count">Servidor: <span id="serverNumber">3500</span></div>
+        <div class="status-item">
+            <span>Servidores:</span>
+            <span id="server-count">3000</span>
+        </div>
     </div>
 
     <nav>
@@ -204,33 +196,35 @@
         <a href="#contact">Contato</a>
     </nav>
 
+    <div id="notifications"></div>
+
     <div class="container">
         <section id="about" class="section">
             <h2>Sobre o KaiLee Bot</h2>
             <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
             <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento de seu servidor e proporcionar entretenimento para sua comunidade.</p>
             <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
-            <a href="https://discord.gg/seuservidor" class="button-secondary" target="_blank">Entrar no Servidor</a>
+            <a href="https://discord.gg/SEU-SERVIDOR" class="button-primary" target="_blank">Servidor do Bot</a>
         </section>
 
-        <section id="features" class="section features">
+        <section id="features" class="section">
             <h2>Funcionalidades</h2>
-            <ul>
-                <li>🎵 Comandos de Música</li>
-                <li>🛠️ Gerenciamento de Servidor</li>
-                <li>🎮 Minijogos Interativos</li>
-                <li>🔔 Notificações Personalizadas</li>
-                <li>🤖 Integração com APIs</li>
+            <ul style="text-align:left;">
+                <li>🎵 Comandos de Música: Toque e controle música diretamente no seu servidor.</li>
+                <li>🛠️ Gerenciamento de Servidor: Ferramentas para admins organizarem seu servidor com eficiência.</li>
+                <li>🎮 Minijogos: Diversão garantida para todos com jogos interativos.</li>
+                <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
+                <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
             </ul>
         </section>
 
         <section id="updates" class="section">
             <h2>Atualizações Recentes</h2>
-            <ul>
-                <li>🚀 Nova função de playlists personalizadas</li>
-                <li>🔧 Melhorias no gerenciamento de servidores</li>
-                <li>🎉 Novos minijogos adicionados</li>
-                <li>🔄 Atualizações regulares de desempenho</li>
+            <ul style="text-align:left;">
+                <li>🚀 Nova função de playlists personalizadas no comando de música.</li>
+                <li>🔧 Melhoria no gerenciamento de servidor com novas opções avançadas.</li>
+                <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
+                <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
             </ul>
         </section>
 
@@ -241,7 +235,7 @@
                 <input type="text" name="name" placeholder="Seu Nome" required>
                 <input type="email" name="email" placeholder="Seu Email" required>
                 <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
-                <button type="submit" class="button-primary">Enviar Mensagem</button>
+                <button type="submit">Enviar Mensagem</button>
             </form>
         </section>
     </div>
@@ -251,39 +245,29 @@
     </footer>
 
     <script>
-        const serverNumber = document.getElementById('serverNumber');
-
+        // Atualização dos servidores
         function updateServerCount() {
-            let current = parseInt(serverNumber.textContent);
-            let change = Math.floor(Math.random() * 20) - 10;
-            let newNumber = Math.min(5000, Math.max(2500, current + change));
-            serverNumber.textContent = newNumber;
+            const serverCount = document.getElementById('server-count');
+            let count = parseInt(serverCount.textContent);
+            const change = Math.floor(Math.random() * 21) - 10;
+            count = Math.max(2500, Math.min(5000, count + change));
+            serverCount.textContent = count;
         }
-
         setInterval(updateServerCount, 5000);
 
-        function createNotification(message, link) {
-            const notification = document.createElement('div');
-            notification.classList.add('notification');
-            notification.innerHTML = `${message} <a href="${link}" style="color:white;font-weight:bold;text-decoration:underline;margin-left:5px;">CONFIRA</a>`;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.remove();
-            }, 5000);
+        // Notificações automáticas
+        const notifications = [
+            { text: "PRECISA ADICIONAR O BOT? CLIQUE AQUI", link: "#about" },
+            { text: "CONFIRA AS FUNÇÕES DO BOT! CONFIRA", link: "#features" },
+            { text: "ENTRE EM CONTATO CONOSCO!", link: "#contact" }
+        ];
+        const notifContainer = document.getElementById('notifications');
+        function showNotification() {
+            const notif = notifications[Math.floor(Math.random() * notifications.length)];
+            notifContainer.innerHTML = `<div class="notification" onclick="location.href='${notif.link}'">${notif.text}</div>`;
         }
-
-        const sections = ['#about', '#features', '#updates', '#contact'];
-        setInterval(() => {
-            const randomSection = sections[Math.floor(Math.random() * sections.length)];
-            const messages = [
-                'PRECISA ADICIONAR O BOT?',
-                'CONFIRA AS FUNÇÕES DO BOT!',
-                'NOVIDADES DISPONÍVEIS!',
-                'ENTRE EM CONTATO AGORA!'
-            ];
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            createNotification(randomMessage, randomSection);
-        }, 12000);
+        setInterval(showNotification, 7000);
+        showNotification();
     </script>
 </body>
 </html>
