@@ -198,9 +198,8 @@
 
     // Função para atualizar o contador suavemente
     function updateServerCount() {
-      // Definir a meta aleatória de incremento ou decremento
       const currentTime = Date.now();
-      if (currentTime - lastUpdateTime > 1500) { // Delay de 1,5 segundos
+      if (currentTime - lastUpdateTime > 2000) { // Delay de 2 segundos
         const delta = Math.floor(Math.random() * 11) - 5; // Incrementa ou decrementa de 5 a 5
         target += delta; // Atualiza a meta
 
@@ -228,12 +227,12 @@
     setInterval(updateServerCount, 2000); // Atualiza a cada 2 segundos
 
     // Função para mostrar notificações com emojis
-    function showNotification(message) {
+    function showNotification(message, section) {
       const notification = document.createElement('div');
       notification.classList.add('notification');
-      notification.innerHTML = `${message} <span>🚀</span>`;
+      notification.innerHTML = `${message} <span>🚀</span><br><small>${section}</small>`;
       document.body.appendChild(notification);
-      
+
       // Exibir a notificação
       setTimeout(() => {
         notification.classList.add('show');
@@ -246,8 +245,11 @@
       }, 5000);
     }
 
-    // Exemplo de notificação
-    setTimeout(() => showNotification('🎉 Adicione emojis ao seu servidor com o KaiLee Bot!'), 3000);
+    // Exemplo de notificações automáticas
+    setTimeout(() => showNotification('🎉 Adicione emojis ao seu servidor com o KaiLee Bot!', 'Sobre'), 3000);
+    setTimeout(() => showNotification('🔔 Nova funcionalidade de comandos avançados!', 'Funcionalidades'), 8000);
+    setTimeout(() => showNotification('🚀 Torne seu servidor ainda mais dinâmico!', 'Atualizações'), 13000);
+    setTimeout(() => showNotification('📞 Entre em contato com nosso suporte!', 'Contato'), 18000);
 
   </script>
 
