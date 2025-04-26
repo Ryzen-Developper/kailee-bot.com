@@ -1,263 +1,281 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KaiLee Bot</title>
-    <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-size: 1.2em;
-        }
-        h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        .status-bar {
-            background-color: #212529;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            font-size: 1.5em;
-            gap: 30px;
-            animation: fadeIn 1s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .status-bar span {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .status-online {
-            color: #00ff00;
-            font-weight: bold;
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #343a40;
-            padding: 12px 0;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-        nav a {
-            color: white;
-            font-size: 1.3em;
-            text-decoration: none;
-            padding: 10px 20px;
-            margin: 0 15px;
-            transition: background-color 0.3s;
-        }
-        nav a:hover {
-            background-color: #007bff;
-            border-radius: 5px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 50px auto 80px auto;
-            padding: 0 20px;
-        }
-        .section {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px;
-            padding: 40px;
-            animation: fadeInUp 1s ease-in-out;
-            text-align: center;
-        }
-        .section img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-        .section h2 {
-            font-size: 2.5em;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-        .section p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: #555;
-        }
-        .features ul {
-            padding-left: 20px;
-            text-align: left;
-        }
-        .features li {
-            font-size: 1.2em;
-            padding-left: 10px;
-            margin: 15px 0;
-        }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        .button-primary {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .button-primary:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 15px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-        }
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KaiLee Bot</title>
+  <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    /* BARRA DE STATUS */
+    .status-bar {
+      background-color: #212529;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px 10px;
+      font-size: 1.5em;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    .status-bar span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .status-online {
+      color: #00ff00;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #343a40;
+      padding: 15px 0;
+    }
+    nav a {
+      color: white;
+      font-size: 1.3em;
+      text-decoration: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      transition: background-color 0.3s;
+    }
+    nav a:hover {
+      background-color: #007bff;
+      border-radius: 5px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 50px auto 80px auto;
+      padding: 0 20px;
+    }
+    .section {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+      padding: 40px;
+      animation: fadeInUp 1s ease-in-out;
+      text-align: center;
+    }
+    .section img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    .section h2 {
+      font-size: 2.5em;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .section p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      color: #555;
+    }
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    /* ANIMAÇÕES */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* NOTIFICAÇÃO */
+    .notification {
+      position: fixed;
+      top: 100px;
+      right: 20px;
+      background-color: #007bff;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      font-size: 1em;
+      display: none;
+      animation: fadeInSlide 0.5s forwards;
+      z-index: 1000;
+    }
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateX(100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .notification button {
+      background-color: white;
+      color: #007bff;
+      border: none;
+      padding: 8px 15px;
+      margin-top: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .notification button:hover {
+      background-color: #e6e6e6;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>KaiLee Bot</h1>
-        <p>Transforme seu servidor Discord com o KaiLee Bot</p>
-    </header>
+<header>
+  <h1>KaiLee Bot</h1>
+  <p>Transforme seu servidor Discord com o KaiLee Bot</p>
+</header>
 
-    <div class="status-bar">
-        <span>🟢 <span class="status-online">Online</span></span>
-        <span>📊 <span id="server-count">0</span> servidores</span>
-    </div>
+<!-- Barra de status -->
+<div class="status-bar">
+  <span>🟢 <span class="status-online">Online</span></span>
+  <span>📊 <span id="server-count">0</span> servidores</span>
+</div>
 
-    <nav>
-        <a href="#about">Sobre</a>
-        <a href="#features">Funcionalidades</a>
-        <a href="#updates">Atualizações</a>
-        <a href="#contact">Contato</a>
-    </nav>
+<!-- Menu -->
+<nav>
+  <a href="#about">Sobre</a>
+  <a href="#features">Funcionalidades</a>
+  <a href="#updates">Atualizações</a>
+  <a href="#contact">Contato</a>
+</nav>
 
-    <div class="container">
+<div class="container">
 
-        <section id="about" class="section">
-            <h2>Sobre o KaiLee Bot</h2>
-            <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
-            <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento de seu servidor e proporcionar entretenimento para sua comunidade.</p>
-            <div class="button-group">
-                <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
-                <a href="https://discord.gg/SEU-SERVIDOR" class="button-primary" target="_blank">Servidor do BOT</a>
-            </div>
-        </section>
+  <section id="about" class="section">
+    <h2>Sobre o KaiLee Bot</h2>
+    <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
+    <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento de seu servidor e proporcionar entretenimento para sua comunidade.</p>
+  </section>
 
-        <section id="features" class="section features">
-            <h2>Funcionalidades</h2>
-            <ul>
-                <li>🎵 Comandos de Música: Toque e controle música diretamente no seu servidor.</li>
-                <li>🛠️ Gerenciamento de Servidor: Ferramentas para admins organizarem seu servidor com eficiência.</li>
-                <li>🎮 Minijogos: Diversão garantida para todos com jogos interativos.</li>
-                <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
-                <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
-            </ul>
-        </section>
+  <section id="features" class="section">
+    <h2>Funcionalidades</h2>
+    <ul style="text-align: left;">
+      <li>🎵 Música de alta qualidade</li>
+      <li>🛠️ Comandos de moderação</li>
+      <li>🎮 Minigames divertidos</li>
+      <li>🔔 Notificações inteligentes</li>
+      <li>🤖 Integrações automáticas</li>
+    </ul>
+  </section>
 
-        <section id="updates" class="section">
-            <h2>Atualizações Recentes</h2>
-            <ul>
-                <li>🚀 Nova função de playlists personalizadas no comando de música.</li>
-                <li>🔧 Melhoria no gerenciamento de servidor com novas opções avançadas.</li>
-                <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
-                <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
-            </ul>
-        </section>
+  <section id="updates" class="section">
+    <h2>Atualizações Recentes</h2>
+    <ul style="text-align: left;">
+      <li>🚀 Novos minigames adicionados</li>
+      <li>🔧 Melhorias nos comandos de música</li>
+      <li>🎉 Integrações novas com APIs</li>
+    </ul>
+  </section>
 
-        <section id="contact" class="section">
-            <h2>Contato</h2>
-            <p>Entre em contato para mais informações ou dúvidas.</p>
-            <form action="https://formspree.io/f/xvgpzveg" method="post">
-                <input type="text" name="name" placeholder="Seu Nome" required>
-                <input type="email" name="email" placeholder="Seu Email" required>
-                <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
-                <button type="submit" class="button-primary">Enviar Mensagem</button>
-            </form>
-        </section>
+  <section id="contact" class="section">
+    <h2>Contato</h2>
+    <p>Entre em contato para mais informações.</p>
+    <form action="https://formspree.io/f/xvgpzveg" method="post">
+      <input type="text" name="name" placeholder="Seu Nome" required>
+      <input type="email" name="email" placeholder="Seu Email" required>
+      <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+      <button type="submit" class="button-primary">Enviar Mensagem</button>
+    </form>
+  </section>
 
-    </div>
+</div>
 
-    <footer>
-        <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
-    </footer>
+<footer>
+  <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
+</footer>
 
-    <script>
-        let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
-        const serverCountElement = document.getElementById('server-count');
+<!-- Notificação dinâmica -->
+<div class="notification" id="notification">
+  <p id="notification-text"></p>
+  <button id="notification-btn">Ir</button>
+</div>
 
-        function animateNumber(current, target) {
-            const step = (target - current) / 20;
-            let count = 0;
-            const interval = setInterval(() => {
-                current += step;
-                count++;
-                serverCountElement.textContent = Math.floor(current).toLocaleString('pt-BR');
-                if (count >= 20) {
-                    clearInterval(interval);
-                    serverCountElement.textContent = target.toLocaleString('pt-BR');
-                }
-            }, 50);
-        }
+<!-- Script de Animações -->
+<script>
+  let serverCount = 3000;
+  const serverCountElement = document.getElementById('server-count');
 
-        function updateServerCount() {
-            const change = Math.floor(Math.random() * 21) - 10;
-            const newCount = Math.max(2500, Math.min(5000, serverCount + change));
-            animateNumber(serverCount, newCount);
-            serverCount = newCount;
-        }
+  function animateNumber(current, target) {
+    const duration = 1500;
+    const frameRate = 30;
+    const totalFrames = duration / (1000 / frameRate);
+    const increment = (target - current) / totalFrames;
+    let currentFrame = 0;
 
-        serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
-        setInterval(updateServerCount, 5000);
-    </script>
+    const interval = setInterval(() => {
+      current += increment;
+      serverCountElement.textContent = Math.floor(current).toLocaleString('pt-BR');
+      currentFrame++;
+      if (currentFrame >= totalFrames) {
+        clearInterval(interval);
+        serverCountElement.textContent = target.toLocaleString('pt-BR');
+      }
+    }, 1000 / frameRate);
+  }
+
+  function updateServerCount() {
+    const change = Math.floor(Math.random() * 21) - 10;
+    const newCount = Math.max(2500, Math.min(5000, serverCount + change));
+    animateNumber(serverCount, newCount);
+    serverCount = newCount;
+  }
+
+  serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
+  setInterval(updateServerCount, 5000);
+
+  // Notificações Aleatórias
+  const notifications = [
+    { text: 'PRECISA ADICIONAR O BOT? CLIQUE AQUI!', link: '#about' },
+    { text: 'CONFIRA AS FUNÇÕES DO BOT! CONFIRA!', link: '#features' }
+  ];
+
+  function showNotification() {
+    const notification = notifications[Math.floor(Math.random() * notifications.length)];
+    const notifElement = document.getElementById('notification');
+    const notifText = document.getElementById('notification-text');
+    const notifBtn = document.getElementById('notification-btn');
+
+    notifText.innerText = notification.text;
+    notifBtn.onclick = () => window.location.href = notification.link;
+
+    notifElement.style.display = 'block';
+
+    setTimeout(() => {
+      notifElement.style.display = 'none';
+    }, 5000);
+  }
+
+  setInterval(showNotification, 12000); // Mostra a cada 12 segundos
+</script>
+
 </body>
 </html>
