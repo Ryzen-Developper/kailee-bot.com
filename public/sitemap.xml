@@ -7,25 +7,25 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kailee-bot-com.vercel.app/#about</loc>
+    <loc>https://kailee-bot-com.vercel.app/</loc>  <!-- Remover o fragmento #about -->
     <lastmod>2025-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kailee-bot-com.vercel.app/#features</loc>
+    <loc>https://kailee-bot-com.vercel.app/</loc>  <!-- Remover o fragmento #features -->
     <lastmod>2025-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kailee-bot-com.vercel.app/#contact</loc>
+    <loc>https://kailee-bot-com.vercel.app/</loc>  <!-- Remover o fragmento #contact -->
     <lastmod>2025-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kailee-bot-com.vercel.app/#updates</loc>
+    <loc>https://kailee-bot-com.vercel.app/</loc>  <!-- Remover o fragmento #updates -->
     <lastmod>2025-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
