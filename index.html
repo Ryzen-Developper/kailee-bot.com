@@ -2,79 +2,66 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8"> <!-- Zoom de 80% -->
   <title>KaiLee Bot</title>
   <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    /* Estilos gerais */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
       background-color: #f8f9fa;
       color: #333;
+      transition: background-color 0.3s, color 0.3s;
+      overflow-x: hidden;
     }
+
     header {
       background-color: #007bff;
       color: white;
-      padding: 40px 20px;
+      padding: 40px 20px 20px 20px;
       text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
+
     h1 {
       font-size: 3em;
       margin: 0;
     }
-    /* BARRA DE STATUS */
-    .status-bar {
-      background-color: #212529;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px 10px;
-      font-size: 1.5em;
-      gap: 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    .status-bar span {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .status-online {
-      color: #00ff00;
-      font-weight: bold;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
+
     nav {
       display: flex;
       justify-content: center;
       background-color: #343a40;
-      padding: 15px 0;
+      padding: 10px 0;
+      margin-top: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
     nav a {
       color: white;
-      font-size: 1.3em;
+      font-size: 1.2em;
       text-decoration: none;
       padding: 10px 20px;
-      margin: 0 10px;
+      margin: 0 15px;
       transition: background-color 0.3s;
     }
+
     nav a:hover {
       background-color: #007bff;
       border-radius: 5px;
     }
+
+    /* Container principal */
     .container {
       max-width: 1200px;
-      margin: 50px auto 80px auto;
+      margin: 50px auto;
       padding: 0 20px;
     }
+
     .section {
       background-color: white;
       border-radius: 10px;
@@ -84,198 +71,265 @@
       animation: fadeInUp 1s ease-in-out;
       text-align: center;
     }
+
     .section img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
+      max-width: 300px;
+      margin: 20px auto;
+      display: block;
       border-radius: 10px;
-      margin: 20px 0;
     }
+
     .section h2 {
       font-size: 2.5em;
       color: #007bff;
       margin-bottom: 20px;
     }
+
     .section p {
       font-size: 1.2em;
       line-height: 1.6;
       color: #555;
     }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .button-primary {
+      background-color: #007bff;
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 10px;
+      display: inline-block;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .button-primary:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .features ul {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .features li {
+      font-size: 1.2em;
+      padding-left: 10px;
+      margin: 15px 0;
+    }
+
     footer {
       background-color: #343a40;
       color: white;
       padding: 20px;
       text-align: center;
+      margin-top: 50px;
     }
-    /* ANIMAÇÕES */
+
+    /* Animações */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* NOTIFICAÇÃO */
+
+    /* Barra de Status */
+    .status-bar {
+      background: white;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 10px 0;
+      text-align: center;
+      font-size: 1.2em;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .status-bar .circle {
+      width: 15px;
+      height: 15px;
+      background-color: #00c851;
+      border-radius: 50%;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    /* Notificações */
     .notification {
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      background-color: #007bff;
+      background: #007bff;
       color: white;
-      padding: 15px 25px;
+      padding: 10px 20px;
+      position: fixed;
+      top: 10px;
+      right: 10px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      font-size: 1em;
-      display: none;
-      animation: fadeInSlide 0.5s forwards;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+      cursor: pointer;
       z-index: 1000;
     }
-    @keyframes fadeInSlide {
-      from { opacity: 0; transform: translateX(100px); }
-      to { opacity: 1; transform: translateX(0); }
+
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
     }
-    .notification button {
-      background-color: white;
-      color: #007bff;
-      border: none;
-      padding: 8px 15px;
-      margin-top: 10px;
+
+    /* Contato */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
       font-size: 1em;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
     }
-    .notification button:hover {
-      background-color: #e6e6e6;
+
+    form button {
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>KaiLee Bot</h1>
-  <p>Transforme seu servidor Discord com o KaiLee Bot</p>
-</header>
+  <header>
+    <h1>KaiLee Bot</h1>
+    <p>Transforme seu servidor Discord com o KaiLee Bot</p>
+  </header>
 
-<!-- Barra de status -->
-<div class="status-bar">
-  <span>🟢 <span class="status-online">Online</span></span>
-  <span>📊 <span id="server-count">0</span> servidores</span>
-</div>
+  <!-- Barra de status -->
+  <div class="status-bar">
+    <div><strong>Servidores:</strong> <span id="serverCount">0000</span></div>
+    <div class="circle"></div>
+    <div><strong>Status:</strong> Online</div>
+  </div>
 
-<!-- Menu -->
-<nav>
-  <a href="#about">Sobre</a>
-  <a href="#features">Funcionalidades</a>
-  <a href="#updates">Atualizações</a>
-  <a href="#contact">Contato</a>
-</nav>
+  <nav>
+    <a href="#about">Sobre</a>
+    <a href="#features">Funcionalidades</a>
+    <a href="#updates">Atualizações</a>
+    <a href="#contact">Contato</a>
+  </nav>
 
-<div class="container">
+  <div class="container">
+    <section id="about" class="section">
+      <h2>Sobre o KaiLee Bot</h2>
+      <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
+      <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento do seu servidor e proporcionar entretenimento para sua comunidade.</p>
+      <div class="buttons">
+        <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
+        <a href="https://discord.gg/servidordobot" class="button-primary" target="_blank">Entrar no Servidor</a>
+      </div>
+    </section>
 
-  <section id="about" class="section">
-    <h2>Sobre o KaiLee Bot</h2>
-    <img src="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" alt="KaiLee Bot">
-    <p>O KaiLee Bot é um bot poderoso para o Discord, com funcionalidades avançadas para facilitar o gerenciamento de seu servidor e proporcionar entretenimento para sua comunidade.</p>
-  </section>
+    <section id="features" class="section features">
+      <h2>Funcionalidades</h2>
+      <ul>
+        <li>🎵 Comandos de Música: Toque e controle música diretamente no seu servidor.</li>
+        <li>🛠️ Gerenciamento de Servidor: Ferramentas para admins organizarem seu servidor com eficiência.</li>
+        <li>🎮 Minijogos: Diversão garantida para todos com jogos interativos.</li>
+        <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
+        <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
+      </ul>
+    </section>
 
-  <section id="features" class="section">
-    <h2>Funcionalidades</h2>
-    <ul style="text-align: left;">
-      <li>🎵 Música de alta qualidade</li>
-      <li>🛠️ Comandos de moderação</li>
-      <li>🎮 Minigames divertidos</li>
-      <li>🔔 Notificações inteligentes</li>
-      <li>🤖 Integrações automáticas</li>
-    </ul>
-  </section>
+    <section id="updates" class="section">
+      <h2>Atualizações Recentes</h2>
+      <ul>
+        <li>🚀 Nova função de playlists personalizadas no comando de música.</li>
+        <li>🔧 Melhoria no gerenciamento de servidor com novas opções avançadas.</li>
+        <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
+        <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
+      </ul>
+    </section>
 
-  <section id="updates" class="section">
-    <h2>Atualizações Recentes</h2>
-    <ul style="text-align: left;">
-      <li>🚀 Novos minigames adicionados</li>
-      <li>🔧 Melhorias nos comandos de música</li>
-      <li>🎉 Integrações novas com APIs</li>
-    </ul>
-  </section>
+    <section id="contact" class="section">
+      <h2>Contato</h2>
+      <p>Entre em contato para mais informações ou dúvidas:</p>
+      <form action="https://formspree.io/f/xvgpzveg" method="post">
+        <input type="text" name="name" placeholder="Seu Nome" required>
+        <input type="email" name="email" placeholder="Seu Email" required>
+        <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+        <button type="submit" class="button-primary">Enviar Mensagem</button>
+      </form>
+    </section>
+  </div>
 
-  <section id="contact" class="section">
-    <h2>Contato</h2>
-    <p>Entre em contato para mais informações.</p>
-    <form action="https://formspree.io/f/xvgpzveg" method="post">
-      <input type="text" name="name" placeholder="Seu Nome" required>
-      <input type="email" name="email" placeholder="Seu Email" required>
-      <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
-      <button type="submit" class="button-primary">Enviar Mensagem</button>
-    </form>
-  </section>
+  <footer>
+    <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
+  </footer>
 
-</div>
+  <!-- Scripts -->
+  <script>
+    // Número de servidores aleatório
+    let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
+    const serverCountElement = document.getElementById('serverCount');
 
-<footer>
-  <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
-</footer>
+    function updateServerCount() {
+      let change = Math.floor(Math.random() * 20) - 10;
+      serverCount = Math.max(2500, Math.min(5000, serverCount + change));
+      animateNumber(serverCountElement, serverCount);
+    }
 
-<!-- Notificação dinâmica -->
-<div class="notification" id="notification">
-  <p id="notification-text"></p>
-  <button id="notification-btn">Ir</button>
-</div>
-
-<!-- Script de Animações -->
-<script>
-  let serverCount = 3000;
-  const serverCountElement = document.getElementById('server-count');
-
-  function animateNumber(current, target) {
-    const duration = 1500;
-    const frameRate = 30;
-    const totalFrames = duration / (1000 / frameRate);
-    const increment = (target - current) / totalFrames;
-    let currentFrame = 0;
-
-    const interval = setInterval(() => {
-      current += increment;
-      serverCountElement.textContent = Math.floor(current).toLocaleString('pt-BR');
-      currentFrame++;
-      if (currentFrame >= totalFrames) {
-        clearInterval(interval);
-        serverCountElement.textContent = target.toLocaleString('pt-BR');
+    function animateNumber(element, to) {
+      let from = parseInt(element.innerText.replace(/\D/g, '')) || 0;
+      let start = null;
+      function step(timestamp) {
+        if (!start) start = timestamp;
+        let progress = timestamp - start;
+        let value = Math.floor(from + (to - from) * (progress / 500));
+        element.innerText = value;
+        if (progress < 500) {
+          requestAnimationFrame(step);
+        } else {
+          element.innerText = to;
+        }
       }
-    }, 1000 / frameRate);
-  }
+      requestAnimationFrame(step);
+    }
 
-  function updateServerCount() {
-    const change = Math.floor(Math.random() * 21) - 10;
-    const newCount = Math.max(2500, Math.min(5000, serverCount + change));
-    animateNumber(serverCount, newCount);
-    serverCount = newCount;
-  }
+    setInterval(updateServerCount, 5000);
 
-  serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
-  setInterval(updateServerCount, 5000);
+    // Notificações
+    const notifications = [
+      { text: "🚀 PRECISA ADICIONAR O BOT? CLIQUE AQUI", link: "#about" },
+      { text: "✨ CONFIRA AS FUNÇÕES DO BOT!", link: "#features" }
+    ];
 
-  // Notificações Aleatórias
-  const notifications = [
-    { text: 'PRECISA ADICIONAR O BOT? CLIQUE AQUI!', link: '#about' },
-    { text: 'CONFIRA AS FUNÇÕES DO BOT! CONFIRA!', link: '#features' }
-  ];
+    function showNotification() {
+      const notification = document.createElement('div');
+      notification.className = 'notification';
+      const random = notifications[Math.floor(Math.random() * notifications.length)];
+      notification.innerText = random.text;
+      notification.onclick = () => window.location.href = random.link;
+      document.body.appendChild(notification);
+      setTimeout(() => notification.classList.add('show'), 100);
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 500);
+      }, 5000);
+    }
 
-  function showNotification() {
-    const notification = notifications[Math.floor(Math.random() * notifications.length)];
-    const notifElement = document.getElementById('notification');
-    const notifText = document.getElementById('notification-text');
-    const notifBtn = document.getElementById('notification-btn');
-
-    notifText.innerText = notification.text;
-    notifBtn.onclick = () => window.location.href = notification.link;
-
-    notifElement.style.display = 'block';
-
-    setTimeout(() => {
-      notifElement.style.display = 'none';
-    }, 5000);
-  }
-
-  setInterval(showNotification, 12000); // Mostra a cada 12 segundos
-</script>
+    setInterval(showNotification, 12000);
+  </script>
 
 </body>
 </html>
