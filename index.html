@@ -239,7 +239,6 @@
         <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
         <a href="https://discord.gg/servidordobot" class="button-primary" target="_blank">Entrar no Servidor</a>
       </div>
-      <div class="notification show" id="notification1">CONVIDE NOSSO BOT PARA SEU SERVIDOR! 🎉</div>
     </section>
 
     <section id="features" class="section features">
@@ -251,7 +250,6 @@
         <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
         <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
       </ul>
-      <div class="notification show" id="notification2">Adicione emojis ao seu servidor! 😎</div>
     </section>
 
     <section id="updates" class="section">
@@ -262,7 +260,6 @@
         <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
         <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
       </ul>
-      <div class="notification show" id="notification3">Atualize o bot para a versão mais recente! 🆙</div>
     </section>
 
     <section id="contact" class="section">
@@ -280,38 +277,17 @@
     <p>&copy; 2025 KaiLee Bot | Todos os direitos reservados</p>
   </footer>
 
-  <!-- Notificação -->
-  <div class="notification" id="notification">Nova atualização disponível! 🚀</div>
-
   <script>
-    // Exibe notificação com animação
-    setTimeout(() => {
-      document.getElementById('notification').classList.add('show');
-      document.getElementById('notification1').classList.add('show');
-      document.getElementById('notification2').classList.add('show');
-      document.getElementById('notification3').classList.add('show');
-    }, 2000);
-
-    // Fecha notificação quando clicada
-    document.getElementById('notification').addEventListener('click', () => {
-      document.getElementById('notification').classList.remove('show');
-    });
-    document.getElementById('notification1').addEventListener('click', () => {
-      document.getElementById('notification1').classList.remove('show');
-    });
-    document.getElementById('notification2').addEventListener('click', () => {
-      document.getElementById('notification2').classList.remove('show');
-    });
-    document.getElementById('notification3').addEventListener('click', () => {
-      document.getElementById('notification3').classList.remove('show');
-    });
+    // Variáveis de controle
+    let currentCount = 5000;
+    let isNotificationVisible = false;
+    let notificationCooldown = false;
 
     // Função para atualizar o contador de servidores com animação de scroll
-    let currentCount = 5000;
     function updateServerCount() {
       const serverCount = document.getElementById('serverCount');
       const targetCount = 10000;
-      
+
       function incrementCount() {
         if (currentCount < targetCount && currentCount < 10000) {
           currentCount++;
@@ -323,8 +299,58 @@
       incrementCount();
     }
 
-    // Chama a função de atualização do servidor
-    updateServerCount();
+    // Função para mostrar as notificações a cada 7 segundos
+    function showNotification(message, sectionId) {
+      if (isNotificationVisible || notificationCooldown) return;
+
+      // Atualiza a variável de controle
+      isNotificationVisible = true;
+
+      // Cria e exibe a notificação
+      const notification = document.createElement('div');
+      notification.classList.add('notification');
+      notification.innerHTML = message;
+
+      // Relaciona a notificação com a seção
+      notification.onclick = function() {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        hideNotification();
+      };
+
+      document.body.appendChild(notification);
+
+      // Mostra e esconde a notificação com animação
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+
+      // Esconde a notificação após 4 segundos
+      setTimeout(hideNotification, 4000);
+
+      // Adiciona cooldown
+      notificationCooldown = true;
+      setTimeout(() => {
+        notificationCooldown = false;
+      }, 7000);
+    }
+
+    // Função para esconder a notificação
+    function hideNotification() {
+      const notification = document.querySelector('.notification');
+      if (notification) {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 500); // Delay para remoção
+      }
+      isNotificationVisible = false;
+    }
+
+    // Atualização do contador de servidores a cada 7 segundos
+    setInterval(updateServerCount, 7000);
+
+    // Exemplo de exibição de notificações
+    setInterval(() => {
+      showNotification("Atualização do servidor disponível! Clique para saber mais.", 'updates');
+    }, 7000);  // Notificação a cada 7 segundos
   </script>
 </body>
 </html>
