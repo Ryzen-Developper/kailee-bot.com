@@ -4,9 +4,9 @@ KaiLee Bot é um bot poderoso para o Discord, desenvolvido para facilitar o gere
 
 ## 📥 Adicionar ao Discord
 
-[Adicionar KaiLee Bot ao seu servidor](#)  
-[Entrar no Servidor de Suporte](#)  
-[Visite o Site do KaiLee Bot](#)
+[Adicionar KaiLee Bot ao seu servidor](https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot)  
+[Entrar no Servidor de Suporte](https://discord.gg/jrtZVfEefk)  
+[Visite o Site do KaiLee Bot](https://kailee-bot-com.vercel.app/)
 
 ---
 
