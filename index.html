@@ -15,54 +15,49 @@
             color: #333;
             transition: background-color 0.3s, color 0.3s;
         }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+        }
+        h1 {
+            font-size: 3em;
+            margin: 0;
+        }
         .status-bar {
             background-color: #212529;
             color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
-            font-size: 1em;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            animation: slideDown 0.5s ease;
+            padding: 20px;
+            font-size: 1.5em;
+            gap: 30px;
+            animation: fadeIn 1s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .status-bar span {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 10px;
         }
         .status-online {
             color: #00ff00;
             font-weight: bold;
         }
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 2.5em;
-            margin: 0;
-        }
         nav {
             display: flex;
             justify-content: center;
             background-color: #343a40;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 12px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
         nav a {
             color: white;
-            font-size: 1.2em;
+            font-size: 1.3em;
             text-decoration: none;
             padding: 10px 20px;
             margin: 0 15px;
@@ -133,10 +128,6 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         form {
             display: flex;
             flex-direction: column;
@@ -161,19 +152,27 @@
             bottom: 0;
             width: 100%;
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-
-    <div class="status-bar">
-        <span>🟢 <span class="status-online">Online</span></span>
-        <span>📊 <span id="server-count">0</span> servidores</span>
-    </div>
 
     <header>
         <h1>KaiLee Bot</h1>
         <p>Transforme seu servidor Discord com o KaiLee Bot</p>
     </header>
+
+    <div class="status-bar">
+        <span>🟢 <span class="status-online">Online</span></span>
+        <span>📊 <span id="server-count">0</span> servidores</span>
+    </div>
 
     <nav>
         <a href="#about">Sobre</a>
@@ -236,10 +235,25 @@
         let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
         const serverCountElement = document.getElementById('server-count');
 
+        function animateNumber(current, target) {
+            const step = (target - current) / 20;
+            let count = 0;
+            const interval = setInterval(() => {
+                current += step;
+                count++;
+                serverCountElement.textContent = Math.floor(current).toLocaleString('pt-BR');
+                if (count >= 20) {
+                    clearInterval(interval);
+                    serverCountElement.textContent = target.toLocaleString('pt-BR');
+                }
+            }, 50);
+        }
+
         function updateServerCount() {
-            const change = Math.floor(Math.random() * 21) - 10; // entre -10 e +10
-            serverCount = Math.max(2500, Math.min(5000, serverCount + change)); // mantém dentro dos limites
-            serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
+            const change = Math.floor(Math.random() * 21) - 10;
+            const newCount = Math.max(2500, Math.min(5000, serverCount + change));
+            animateNumber(serverCount, newCount);
+            serverCount = newCount;
         }
 
         serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
