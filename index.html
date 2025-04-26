@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KaiLee Bot</title>
+    <link rel="icon" href="https://telegra.ph/file/51d8b9721cbb2e198ef1c.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -13,6 +14,33 @@
             background-color: #f8f9fa;
             color: #333;
             transition: background-color 0.3s, color 0.3s;
+        }
+        .status-bar {
+            background-color: #212529;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: 1em;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            animation: slideDown 0.5s ease;
+        }
+        .status-bar span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .status-online {
+            color: #00ff00;
+            font-weight: bold;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         header {
             background-color: #007bff;
@@ -46,7 +74,7 @@
         }
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 50px auto 80px auto;
             padding: 0 20px;
         }
         .section {
@@ -84,15 +112,12 @@
             padding-left: 10px;
             margin: 15px 0;
         }
-        footer {
-            background-color: #343a40;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
         .button-primary {
             background-color: #007bff;
@@ -102,21 +127,15 @@
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .button-primary:hover {
             background-color: #0056b3;
+            transform: scale(1.05);
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
         }
         form {
             display: flex;
@@ -133,9 +152,24 @@
             border-radius: 5px;
             resize: vertical;
         }
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
+
+    <div class="status-bar">
+        <span>🟢 <span class="status-online">Online</span></span>
+        <span>📊 <span id="server-count">0</span> servidores</span>
+    </div>
+
     <header>
         <h1>KaiLee Bot</h1>
         <p>Transforme seu servidor Discord com o KaiLee Bot</p>
@@ -197,5 +231,19 @@
     <footer>
         <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
+        const serverCountElement = document.getElementById('server-count');
+
+        function updateServerCount() {
+            const change = Math.floor(Math.random() * 21) - 10; // entre -10 e +10
+            serverCount = Math.max(2500, Math.min(5000, serverCount + change)); // mantém dentro dos limites
+            serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
+        }
+
+        serverCountElement.textContent = serverCount.toLocaleString('pt-BR');
+        setInterval(updateServerCount, 5000);
+    </script>
 </body>
 </html>
