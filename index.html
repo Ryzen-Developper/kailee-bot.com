@@ -186,27 +186,26 @@
       transform: translateY(0);
     }
 
-    .notification-btn {
+    /* Contato */
+    form {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      margin-top: 20px;
+      gap: 15px;
     }
 
-    .notification-btn .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+    form input, form textarea {
+      width: 100%;
+      max-width: 600px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1em;
     }
 
-    .notification-btn .btn:hover {
-      background-color: #0056b3;
+    form button {
+      margin-top: 10px;
     }
-
   </style>
 </head>
 <body>
@@ -218,7 +217,7 @@
 
   <!-- Barra de status -->
   <div class="status-bar">
-    <div><strong>Servidores:</strong> <span id="serverCount">5000</span></div>
+    <div><strong>Servidores:</strong> <span id="serverCount">0000</span></div>
     <div class="circle"></div>
     <div><strong>Status:</strong> Online</div>
   </div>
@@ -266,91 +265,76 @@
       <h2>Contato</h2>
       <p>Entre em contato para mais informações ou dúvidas:</p>
       <form action="https://formspree.io/f/xvgpzveg" method="post">
-        <input type="email" name="email" placeholder="Seu e-mail" required>
-        <textarea name="message" rows="5" placeholder="Sua mensagem" required></textarea>
+        <input type="text" name="name" placeholder="Seu Nome" required>
+        <input type="email" name="email" placeholder="Seu Email" required>
+        <textarea name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
         <button type="submit" class="button-primary">Enviar Mensagem</button>
       </form>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2025 KaiLee Bot | Todos os direitos reservados</p>
+    <p>&copy; 2024 KaiLee Bot. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Scripts -->
   <script>
-    // Variáveis de controle
-    let currentCount = 5000;
-    let isNotificationVisible = false;
-    let notificationCooldown = false;
+    // Inicializa o contador com valor aleatório entre 5000 e 10000
+    let serverCount = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+    const serverCountElement = document.getElementById('serverCount');
+    let lastUpdateTime = Date.now();
+    let isNotifying = false;
 
-    // Função para atualizar o contador de servidores com animação de scroll
     function updateServerCount() {
-      const serverCount = document.getElementById('serverCount');
-      const targetCount = 10000;
+      const timeElapsed = Date.now() - lastUpdateTime;
+      if (timeElapsed < 1000) return;  // Espera pelo menos 1 segundo para atualizar
 
-      function incrementCount() {
-        if (currentCount < targetCount && currentCount < 10000) {
-          currentCount++;
-          serverCount.textContent = currentCount;
-          setTimeout(incrementCount, 50);  // Delay de animação
-        }
-      }
-
-      incrementCount();
+      let change = Math.floor(Math.random() * 3) - 1;  // Altera de -1 a +1
+      serverCount = Math.max(5000, Math.min(10000, serverCount + change));
+      animateNumber(serverCountElement, serverCount);
+      lastUpdateTime = Date.now();
     }
 
-    // Função para mostrar as notificações a cada 7 segundos
+    function animateNumber(element, target) {
+      const current = parseInt(element.innerText);
+      const step = current < target ? 1 : -1;
+      const interval = setInterval(() => {
+        element.innerText = current + step;
+        if (current + step === target) clearInterval(interval);
+      }, 50);
+    }
+
+    setInterval(updateServerCount, 2000); // Atualiza a cada 2 segundos
+
+    // Função de notificação com cooldown
     function showNotification(message, sectionId) {
-      if (isNotificationVisible || notificationCooldown) return;
+      if (isNotifying) return;
+      isNotifying = true;
 
-      // Atualiza a variável de controle
-      isNotificationVisible = true;
-
-      // Cria e exibe a notificação
       const notification = document.createElement('div');
       notification.classList.add('notification');
-      notification.innerHTML = message;
-
-      // Relaciona a notificação com a seção
-      notification.onclick = function() {
-        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-        hideNotification();
-      };
+      notification.innerHTML = `<strong>${message}</strong> <a href="#${sectionId}" style="color: white;">Ver</a>`;
 
       document.body.appendChild(notification);
 
-      // Mostra e esconde a notificação com animação
       setTimeout(() => {
         notification.classList.add('show');
       }, 100);
 
-      // Esconde a notificação após 4 segundos
-      setTimeout(hideNotification, 4000);
-
-      // Adiciona cooldown
-      notificationCooldown = true;
       setTimeout(() => {
-        notificationCooldown = false;
-      }, 7000);
-    }
-
-    // Função para esconder a notificação
-    function hideNotification() {
-      const notification = document.querySelector('.notification');
-      if (notification) {
         notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 500); // Delay para remoção
-      }
-      isNotificationVisible = false;
+        setTimeout(() => {
+          document.body.removeChild(notification);
+          isNotifying = false;
+        }, 500);
+      }, 7000); // Notificação visível por 7 segundos
     }
 
-    // Atualização do contador de servidores a cada 7 segundos
-    setInterval(updateServerCount, 7000);
-
-    // Exemplo de exibição de notificações
-    setInterval(() => {
-      showNotification("Atualização do servidor disponível! Clique para saber mais.", 'updates');
-    }, 7000);  // Notificação a cada 7 segundos
+    // Testando a notificação
+    setTimeout(() => {
+      showNotification('Adicione nosso bot ao seu servidor!', 'about');
+    }, 5000);
   </script>
+
 </body>
 </html>
