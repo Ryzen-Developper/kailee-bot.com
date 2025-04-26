@@ -186,26 +186,27 @@
       transform: translateY(0);
     }
 
-    /* Contato */
-    form {
+    .notification-btn {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 15px;
+      margin-top: 20px;
     }
 
-    form input, form textarea {
-      width: 100%;
-      max-width: 600px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      font-size: 1em;
+    .notification-btn .btn {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    form button {
-      margin-top: 10px;
+    .notification-btn .btn:hover {
+      background-color: #0056b3;
     }
+
   </style>
 </head>
 <body>
@@ -217,7 +218,7 @@
 
   <!-- Barra de status -->
   <div class="status-bar">
-    <div><strong>Servidores:</strong> <span id="serverCount">0000</span></div>
+    <div><strong>Servidores:</strong> <span id="serverCount">5000</span></div>
     <div class="circle"></div>
     <div><strong>Status:</strong> Online</div>
   </div>
@@ -238,6 +239,7 @@
         <a href="https://discord.com/oauth2/authorize?client_id=1265671196863762486&permissions=1077226614&scope=bot" class="button-primary" target="_blank">Adicionar ao Discord</a>
         <a href="https://discord.gg/servidordobot" class="button-primary" target="_blank">Entrar no Servidor</a>
       </div>
+      <div class="notification show" id="notification1">CONVIDE NOSSO BOT PARA SEU SERVIDOR! 🎉</div>
     </section>
 
     <section id="features" class="section features">
@@ -249,6 +251,7 @@
         <li>🔔 Notificações: Receba alertas de eventos importantes.</li>
         <li>🤖 Integração com APIs: Conecte-se a outros serviços para mais funcionalidades.</li>
       </ul>
+      <div class="notification show" id="notification2">Adicione emojis ao seu servidor! 😎</div>
     </section>
 
     <section id="updates" class="section">
@@ -259,6 +262,7 @@
         <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
         <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
       </ul>
+      <div class="notification show" id="notification3">Atualize o bot para a versão mais recente! 🆙</div>
     </section>
 
     <section id="contact" class="section">
@@ -283,17 +287,40 @@
     // Exibe notificação com animação
     setTimeout(() => {
       document.getElementById('notification').classList.add('show');
+      document.getElementById('notification1').classList.add('show');
+      document.getElementById('notification2').classList.add('show');
+      document.getElementById('notification3').classList.add('show');
     }, 2000);
 
     // Fecha notificação quando clicada
     document.getElementById('notification').addEventListener('click', () => {
       document.getElementById('notification').classList.remove('show');
     });
+    document.getElementById('notification1').addEventListener('click', () => {
+      document.getElementById('notification1').classList.remove('show');
+    });
+    document.getElementById('notification2').addEventListener('click', () => {
+      document.getElementById('notification2').classList.remove('show');
+    });
+    document.getElementById('notification3').addEventListener('click', () => {
+      document.getElementById('notification3').classList.remove('show');
+    });
 
-    // Função para atualizar o contador de servidores
+    // Função para atualizar o contador de servidores com animação de scroll
+    let currentCount = 5000;
     function updateServerCount() {
       const serverCount = document.getElementById('serverCount');
-      serverCount.textContent = '12,345'; // Exemplo de número de servidores
+      const targetCount = 10000;
+      
+      function incrementCount() {
+        if (currentCount < targetCount && currentCount < 10000) {
+          currentCount++;
+          serverCount.textContent = currentCount;
+          setTimeout(incrementCount, 50);  // Delay de animação
+        }
+      }
+
+      incrementCount();
     }
 
     // Chama a função de atualização do servidor
