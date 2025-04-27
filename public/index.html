@@ -291,8 +291,8 @@
 
   <script>
     // Número de servidores aleatório
-    let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
-    const serverCountElement = document.getElementById('serverCount');
+      let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
+      document.getElementById('serverCount').textContent = serverCount.toLocaleString();
 
     function updateServerCount() {
       let change = Math.floor(Math.random() * 20) - 10;
