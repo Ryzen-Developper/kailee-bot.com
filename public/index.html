@@ -267,93 +267,44 @@
     </section>
 
     <section id="updates" class="section">
-      <h2>Atualizações Recentes</h2>
-      <ul>
-        <li>🚀 Nova função de playlists personalizadas no comando de música.</li>
-        <li>🔧 Melhoria no gerenciamento de servidor com novas opções avançadas.</li>
-        <li>🎉 Novos minijogos adicionados para entreter sua comunidade.</li>
-        <li>🔄 Atualizações regulares para maior desempenho e segurança.</li>
-      </ul>
+      <h2>Últimas Atualizações</h2>
+      <p>Confira as últimas melhorias e recursos adicionados ao KaiLee Bot.</p>
     </section>
 
     <section id="contact" class="section">
-      <h2>Contato</h2>
-      <p>Entre em contato para mais informações ou dúvidas:</p>
-      <form action="https://formspree.io/f/xvgpzveg" method="POST">
-        <input type="text" name="name" placeholder="Seu nome" required>
-        <input type="email" name="email" placeholder="Seu e-mail" required>
-        <textarea name="message" rows="4" placeholder="Sua mensagem" required></textarea>
+      <h2>Entre em Contato</h2>
+      <form action="#" method="POST">
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="Seu e-mail" required>
+        <textarea placeholder="Sua mensagem..." required></textarea>
         <button type="submit" class="button-primary">Enviar Mensagem</button>
       </form>
     </section>
   </div>
 
   <footer>
-    <p>&copy; 2025 KaiLee Bot | Todos os direitos reservados</p>
+    <p>&copy; 2025 KaiLee Bot. Todos os direitos reservados.</p>
   </footer>
 
+  <div class="notification" id="notification">Novo servidor adicionado com sucesso!</div>
+
   <script>
-    // Número de servidores aleatório
-    let serverCount = Math.floor(Math.random() * (5000 - 2500 + 1)) + 2500;
-    const serverCountElement = document.getElementById('serverCount');
-
-    function updateServerCount() {
-      let change = Math.floor(Math.random() * 20) - 10;
-      serverCount = Math.max(2500, Math.min(5000, serverCount + change));
-      animateNumber(serverCountElement, serverCount);
-    }
-
-    function animateNumber(element, to) {
-      let from = parseInt(element.innerText.replace(/\D/g, '')) || 0;
-      let start = null;
-      function step(timestamp) {
-        if (!start) start = timestamp;
-        let progress = timestamp - start;
-        let value = Math.floor(from + (to - from) * (progress / 500));
-        element.innerText = value;
-        if (progress < 500) {
-          requestAnimationFrame(step);
-        } else {
-          element.innerText = to;
-        }
-      }
-      requestAnimationFrame(step);
-    }
-
-    setInterval(updateServerCount, 5000);
-
-    // Notificações
-    const notifications = [
-      { text: "🚀 PRECISA ADICIONAR O BOT? CLIQUE AQUI", link: "#about" },
-      { text: "✨ CONFIRA AS FUNÇÕES DO BOT!", link: "#features" }
-    ];
-
-    let lastNotification = ""; // Variável para armazenar a última notificação exibida
-
-    function showNotification() {
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      
-      // Filtrando uma notificação diferente da última
-      let random;
-      do {
-        random = notifications[Math.floor(Math.random() * notifications.length)];
-      } while (random.text === lastNotification); // Evitar repetir a última
-
-      notification.innerText = random.text;
-      notification.onclick = () => window.location.href = random.link;
-
-      document.body.appendChild(notification);
-      lastNotification = random.text; // Atualizar a última notificação exibida
-
-      setTimeout(() => notification.classList.add('show'), 100);
-      setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => notification.remove(), 500);
+    document.addEventListener("DOMContentLoaded", function () {
+      let notification = document.getElementById("notification");
+      setTimeout(function() {
+        notification.classList.add("show");
+      }, 1000);
+      setTimeout(function() {
+        notification.classList.remove("show");
       }, 5000);
-    }
+    });
 
-    setInterval(showNotification, 12000);
+    // Simulando o contador de servidores
+    setInterval(function() {
+      var count = Math.floor(Math.random() * 5000) + 5000;
+      document.getElementById("serverCount").innerText = count;
+    }, 3000);
   </script>
+
 </body>
 </html>
